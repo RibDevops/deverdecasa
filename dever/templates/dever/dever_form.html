@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Novo Dever</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Adicionar Novo Dever de Casa</h1>
+    </header>
+    <div class="container">
+        <div class="card">
+            <form method="post" action="{% url 'dever_create' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Salvar</button>
+            </form>
+            <a href="{% url 'dever_list' %}" class="btn">Voltar para a Lista</a>
+        </div>
+    </div>
+</body>
+</html>

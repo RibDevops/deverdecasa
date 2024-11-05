@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Deveres</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Lista de Deveres de Casa</h1>
+    </header>
+    <div class="container">
+        {% for dever in deveres %}
+        <div class="card">
+            <h2>{{ dever.fk_materia.nome_materia }} - {{ dever.descricao }}</h2>
+            <p><strong>Professor:</strong> {{ dever.fk_professor.nome_professor }}</p>
+            <p><strong>Escola:</strong> {{ dever.fk_escola.nome_escola }}</p>
+            <a href="{% url 'dever_detail' dever.id %}" class="btn">Ver detalhes</a>
+        </div>
+        {% empty %}
+        <p>Nenhum dever de casa encontrado.</p>
+        {% endfor %}
+        <a href="{% url 'dever_create' %}" class="btn">Adicionar Novo Dever</a>
+    </div>
+</body>
+</html>
