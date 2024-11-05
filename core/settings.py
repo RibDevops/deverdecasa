@@ -108,8 +108,6 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # DATABASES = {'default': dj_database_url.config(default='postgresql://deverdecasa_db_user:U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj@dpg-cskh7opu0jms73bc4r20-a.oregon-postgres.render.com/deverdecasa_db', conn_max_age=600)}
 # DATABASES = {'default': dj_database_url.config(default='postgresql://postgres:postgres@localhost:5432/deverdecasa_db', conn_max_age=600)}
 DATABASES = {'default': dj_database_url.config(default='postgresql://deverdecasa_db_user:U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj@dpg-cskh7opu0jms73bc4r20-a/deverdecasa_db', conn_max_age=600)}
-    # Replace this value with your local database's connection string.       
-
 
 #postgresql://deverdecasa_db_user:U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj@dpg-cskh7opu0jms73bc4r20-a/deverdecasa_db
 
