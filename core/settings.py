@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import dj_database_url
+
 import os
 
 from pathlib import Path
@@ -30,10 +31,19 @@ SECRET_KEY = 'django-insecure-s7j71)53oc4+86p4_#5%v5+i)g-7zlqshu^r*2tm*wx=j&4m=a
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
 
-DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+# DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+DEBUG = os.environ.get('DEBUG', 'True')=="True"
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 # ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+
+ALLOWED_HOSTS = ['*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1',        
+    'http://localhost',
+    'https://deverdecasa.onrender.com'
+]
 
 # Application definition
 
@@ -52,6 +62,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -92,17 +103,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'deverdecasa_db',
-        'USER': 'deverdecasa_db_user',
-        'PASSWORD': 'U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj',
-        'HOST': 'dpg-cskh7opu0jms73bc4r20-a.oregon-postgres.render.com',  # Use o host externo completo
-        'PORT': '5432',
-    }
-}
 
+# 
+# DATABASES = {'default': dj_database_url.config(default='postgresql://deverdecasa_db_user:U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj@dpg-cskh7opu0jms73bc4r20-a.oregon-postgres.render.com/deverdecasa_db', conn_max_age=600)}
+# DATABASES = {'default': dj_database_url.config(default='postgresql://postgres:postgres@localhost:5432/deverdecasa_db', conn_max_age=600)}
+DATABASES = {'default': dj_database_url.config(default='postgresql://deverdecasa_db_user:U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj@dpg-cskh7opu0jms73bc4r20-a/deverdecasa_db', conn_max_age=600)}
+    # Replace this value with your local database's connection string.       
 
 
 #postgresql://deverdecasa_db_user:U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj@dpg-cskh7opu0jms73bc4r20-a/deverdecasa_db
@@ -142,6 +148,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATIC_URL = '/static/'
+    # This production code might break development mode, so we check whether we're in DEBUG mode
+if not DEBUG:    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+        # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+        # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

@@ -8,3 +8,4 @@ urlpatterns = [
     path('user/<str:nick>', views.get_by_nick),
     path('data/', views.user_manager)
 ]
+

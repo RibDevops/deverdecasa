@@ -1,0 +1,33 @@
+Connections
+Hostname - dpg-cskh7opu0jms73bc4r20-a
+
+An internal hostname used by your Render services.
+Port - 5432
+Database deverdecasa_db
+Username deverdecasa_db_user
+Password U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj
+Internal Database URL postgresql://deverdecasa_db_user:U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj@dpg-cskh7opu0jms73bc4r20-a/deverdecasa_db
+External Database URL postgresql://deverdecasa_db_user:U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj@dpg-cskh7opu0jms73bc4r20-a.oregon-postgres.render.com/deverdecasa_db
+PSQL Command PGPASSWORD=U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj psql -h dpg-cskh7opu0jms73bc4r20-a.oregon-postgres.render.com -U deverdecasa_db_user deverdecasa_db
+
+Como ajustar sua URL
+
+Com base nos detalhes fornecidos, a URL deve ser:
+
+bash
+
+jdbc:postgresql://dpg-cskh7opu0jms73bc4r20-a.oregon-postgres.render.com:5432/deverdecasa_db
+
+Detalhes para preencher no DBeaver:
+
+    Host: dpg-cskh7opu0jms73bc4r20-a.oregon-postgres.render.com
+    Port: 5432
+    Database: deverdecasa_db
+    Username: deverdecasa_db_user
+    Password: U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj
+
+Passos no DBeaver:
+ 
+ 
+ 
+ 
