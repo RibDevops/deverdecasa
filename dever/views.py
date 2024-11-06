@@ -65,8 +65,6 @@
 #         if self.request.user.role == User.PROFESSOR:
 #             form.instance.fk_professor = get_object_or_404(Professor, usuario=self.request.user)
 #         return super().form_valid(form)
-
-
 # dever/views.py
 
 from django.shortcuts import render, get_object_or_404
@@ -87,16 +85,17 @@ class DeverDetailView(DetailView):
 class DeverCreateView(CreateView):
     model = DeverDeCasa
     template_name = 'dever/dever_form.html'
-    fields = ['fk_escola', 'fk_professor', 'fk_materia', 'fk_livro', 'dever']
+    fields = ['fk_escola', 'fk_professor', 'fk_materia', 'fk_livro', 'descricao']
     success_url = reverse_lazy('dever_list')
 
 class DeverUpdateView(UpdateView):
     model = DeverDeCasa
     template_name = 'dever/dever_form.html'
-    fields = ['fk_escola', 'fk_professor', 'fk_materia', 'fk_livro', 'dever']
+    fields = ['fk_escola', 'fk_professor', 'fk_materia', 'fk_livro', 'descricao']
     success_url = reverse_lazy('dever_list')
 
 class DeverDeleteView(DeleteView):
     model = DeverDeCasa
     template_name = 'dever/dever_confirm_delete.html'
     success_url = reverse_lazy('dever_list')
+
