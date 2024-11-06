@@ -31,7 +31,11 @@ from django.db import models
 #         verbose_name="user permissions"
 #     )
 
+class Materia(models.Model):
+    nome_materia = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.nome_materia
 
 class Escola(models.Model):
     nome_escola = models.CharField(max_length=100)
@@ -41,7 +45,8 @@ class Escola(models.Model):
 
 
 class Professor(models.Model):
-    fk_escola = models.ForeignKey(Escola, on_delete=models.CASCADE, related_name="professores")
+    fk_escola = models.ForeignKey(Escola, on_delete=models.CASCADE, related_name="Professores")
+    fk_materia = models.ForeignKey(Materia, on_delete=models.CASCADE, related_name="Materia")
     nome_professor = models.CharField(max_length=100)
     # usuario = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -58,11 +63,7 @@ class Aluno(models.Model):
         return self.nome_aluno
 
 
-class Materia(models.Model):
-    nome_materia = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.nome_materia
 
 
 class Livro(models.Model):
