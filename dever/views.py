@@ -32,7 +32,7 @@ def dever_list(request):
         elif dias_para_entrega == 3:
             dever.cor_fundo = "verde"
         else:
-            dever.cor_fundo = "normal"
+            dever.cor_fundo = "verde"
     
     return render(request, 'dever/dever_list.html', {'deveres': deveres})
 

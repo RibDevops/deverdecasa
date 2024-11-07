@@ -1,4 +1,5 @@
-
+{% extends 'base.html' %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="pt">
@@ -83,33 +84,10 @@
     </style>
 </head>
 <body>
+    {% block content %}
     <div class="container">
-        <a href="{% url 'dever_create' %}" class="btn btn-novo">Adicionar Novo Dever</a>
-        <h1>Lista de Deveres</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>DIA</th>
-                    <th>MATÉRIA</th>
-                    <th>DEVER</th>
-                    <th>AÇÕES</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for dever in deveres %}
-                    <tr class="{{ dever.cor_fundo|default:'normal' }}">
-                        <td>{{ dever.data_entrega }}</td>
-                        <td>{{ dever.fk_materia.nome_materia }}</td>
-                        <td>{{ dever.dever }}</td>
-                        <td>
-                            <a href="{% url 'dever_detail' dever.pk %}" class="btn btn-detail">Ver Detalhes</a>
-                            <a href="{% url 'dever_update' dever.pk %}" class="btn btn-edit">Editar</a>
-                            <a href="{% url 'dever_delete' dever.pk %}" class="btn btn-delete">Excluir</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+
     </div>
+    {% endblock %}
 </body>
 </html>

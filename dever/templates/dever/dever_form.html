@@ -14,7 +14,7 @@
     </header>
     <div class="container">
         <div class="card">
-            <form method="post" action="{% url 'dever_create' %}">
+            <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Salvar</button>
