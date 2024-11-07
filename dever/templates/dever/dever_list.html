@@ -10,7 +10,7 @@
     <style type="text/css">
         /* Estilo para a div centralizada */
         .container {
-            
+            width: 400px;
             margin: 0 auto;
         }
 
@@ -142,9 +142,9 @@
                         <td data-label="MATÉRIA">{{ dever.fk_materia.nome_materia }}</td>
                         <td data-label="DEVER">{{ dever.dever }}</td>
                         <td data-label="AÇÕES">
-                            <a href="{% url 'dever_detail' dever.pk %}" class="btn btn-detail">Ver Detalhes</a>
-                            <a href="{% url 'dever_update' dever.pk %}" class="btn btn-edit">Editar</a>
-                            <a href="{% url 'dever_delete' dever.pk %}" class="btn btn-delete">Excluir</a>
+                            <a href="{% url 'dever_detail' dever.pk %}" class="btn btn-detail">Detalhes</a><p>
+                            <a href="{% url 'dever_update' dever.pk %}" class="btn btn-edit">Editar</a><p>
+                            <a href="{% url 'dever_delete' dever.pk %}" class="btn btn-delete">Excluir</a><p>
                         </td>
                     </tr>
                 {% endfor %}
