@@ -1,30 +1,105 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Deveres</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  
+    <style type="text/css">
+        /* Estilo para a div centralizada */
+        .container {
+            width: 800px;
+            margin: 0 auto;
+        }
 
+        /* Estilo para a tabela com borda arredondada */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            border-radius: 10px; /* Bordas arredondadas */
+            overflow: hidden; /* Para evitar que o conteúdo transborde */
+        }
+
+        /* Estilo para as células (th, td) */
+        th, td {
+            padding: 8px;
+            text-align: center;
+            border: 1px dashed #bbb; /* Borda da célula */
+            border-radius: 8px; /* Bordas arredondadas nas células */
+        }
+
+        /* Estilos de fundo para cada categoria de prazo */
+        .vermelho { background-color: #f28b82; }
+        .amarelo { background-color: #fff475; }
+        .verde { background-color: #ccff90; }
+        .normal { background-color: #ffffff; }
+
+        /* Estilo dos botões */
+        .btn {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .btn-detail { background-color: #4CAF50; }
+        .btn-edit { background-color: #FFC107; }
+        .btn-delete { background-color: #F44336; }
+
+        /* Responsividade para celular */
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            th { display: none; }
+            td {
+                position: relative;
+                padding-left: 50%;
+            }
+            td::before {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+            td:nth-of-type(1)::before { content: "DIA"; }
+            td:nth-of-type(2)::before { content: "MATÉRIA"; }
+            td:nth-of-type(3)::before { content: "DEVER"; }
+            td:nth-of-type(4)::before { content: "AÇÕES"; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Lista de Deveres de Casa</h1>
-    </header>
     <div class="container">
-        {% for dever in deveres %}
-        <div class="card">
-            <h2>{{ dever.fk_materia.nome_materia }} - {{ dever.descricao }}</h2>
-            <p><strong>Professor:</strong> {{ dever.fk_professor.nome_professor }}</p>
-            <p><strong>Escola:</strong> {{ dever.fk_escola.nome_escola }}</p>
-            <a href="{% url 'dever_detail' dever.id %}" class="btn">Ver detalhes</a>
-        </div>
-        {% empty %}
-        <p>Nenhum dever de casa encontrado.</p>
-        {% endfor %}
         <a href="{% url 'dever_create' %}" class="btn">Adicionar Novo Dever</a>
+        <h1>Lista de Deveres</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>DIA</th>
+                    <th>MATÉRIA</th>
+                    <th>DEVER</th>
+                    <th>AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dever in deveres %}
+                    <tr class="{{ dever.cor_fundo|default:'normal' }}">
+                        <td>{{ dever.data_entrega }}</td>
+                        <td>{{ dever.fk_materia.nome_materia }}</td>
+                        <td>{{ dever.dever }}</td>
+                        <td>
+                            <a href="{% url 'dever_detail' dever.pk %}" class="btn btn-detail">Ver Detalhes</a>
+                            <a href="{% url 'dever_update' dever.pk %}" class="btn btn-edit">Editar</a>
+                            <a href="{% url 'dever_delete' dever.pk %}" class="btn btn-delete">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

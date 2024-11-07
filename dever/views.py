@@ -1,101 +1,74 @@
-
-# from django.shortcuts import render, get_object_or_404
-# from django.contrib.auth.decorators import login_required
-# from django.utils.decorators import method_decorator
-# from django.views.generic import ListView, DetailView, CreateView
-# from django.urls import reverse_lazy
-# from django.http import HttpResponseForbidden
-# from .models import Escola, Professor, Aluno, Materia, Livro, DeverDeCasa, User
-# from .forms import DeverDeCasaForm
-
-
-
-
-
-
-
-
-# class RoleRequiredMixin:
-#     allowed_roles = []
-
-#     def dispatch(self, request, *args, **kwargs):
-#         if request.user.role not in self.allowed_roles:
-#             return HttpResponseForbidden("Você não tem permissão para acessar esta página.")
-#         return super().dispatch(request, *args, **kwargs)
-
-# @method_decorator(login_required, name='dispatch')
-# class DeverListView(RoleRequiredMixin, ListView):
-#     model = DeverDeCasa
-#     template_name = "dever_list.html"
-#     context_object_name = "deveres"
-#     allowed_roles = [User.COORDENADOR, User.PROFESSOR, User.PAI]
-
-#     def get_queryset(self):
-#         if self.request.user.role == User.COORDENADOR:
-#             return DeverDeCasa.objects.all()
-#         elif self.request.user.role == User.PROFESSOR:
-#             return DeverDeCasa.objects.filter(fk_professor__usuario=self.request.user)
-#         elif self.request.user.role == User.PAI:
-#             return DeverDeCasa.objects.all()
-#         return DeverDeCasa.objects.none()
-
-# @method_decorator(login_required, name='dispatch')
-# class DeverDetailView(RoleRequiredMixin, DetailView):
-#     model = DeverDeCasa
-#     template_name = "dever_detail.html"
-#     context_object_name = "dever"
-#     allowed_roles = [User.COORDENADOR, User.PROFESSOR, User.PAI]
-
-#     def get(self, request, *args, **kwargs):
-#         self.object = self.get_object()
-#         if not self.object.is_accessible_by(request.user):
-#             return HttpResponseForbidden("Você não tem permissão para acessar este dever.")
-#         return super().get(request, *args, **kwargs)
-
-
-# @method_decorator(login_required, name='dispatch')
-# class DeverCreateView(RoleRequiredMixin, CreateView):
-#     model = DeverDeCasa
-#     form_class = DeverDeCasaForm
-#     template_name = "dever_form.html"
-#     success_url = reverse_lazy('dever_list')
-#     allowed_roles = [User.COORDENADOR, User.PROFESSOR]
-
-#     def form_valid(self, form):
-#         if self.request.user.role == User.PROFESSOR:
-#             form.instance.fk_professor = get_object_or_404(Professor, usuario=self.request.user)
-#         return super().form_valid(form)
-# dever/views.py
-
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import DeverDeCasa
 
-class DeverListView(ListView):
-    model = DeverDeCasa
-    template_name = 'dever/dever_list.html'
-    context_object_name = 'deveres'
+from datetime import date, timedelta
+from django.shortcuts import render
+from .models import DeverDeCasa
 
-class DeverDetailView(DetailView):
-    model = DeverDeCasa
-    template_name = 'dever/dever_detail.html'
-    context_object_name = 'dever'
+# views.py
 
-class DeverCreateView(CreateView):
-    model = DeverDeCasa
-    template_name = 'dever/dever_form.html'
-    fields = ['fk_escola', 'fk_professor', 'fk_materia', 'fk_livro', 'descricao']
-    success_url = reverse_lazy('dever_list')
+from django.shortcuts import render
+from .models import DeverDeCasa
+from datetime import date
 
-class DeverUpdateView(UpdateView):
-    model = DeverDeCasa
-    template_name = 'dever/dever_form.html'
-    fields = ['fk_escola', 'fk_professor', 'fk_materia', 'fk_livro', 'descricao']
-    success_url = reverse_lazy('dever_list')
+from django.views.generic import ListView
 
-class DeverDeleteView(DeleteView):
-    model = DeverDeCasa
-    template_name = 'dever/dever_confirm_delete.html'
-    success_url = reverse_lazy('dever_list')
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
+from .models import DeverDeCasa
+from .forms import DeverDeCasaForm  # Assumindo que você tenha um formulário personalizado
+from datetime import date
+
+def dever_list(request):
+    deveres = DeverDeCasa.objects.all().order_by('data_entrega')
+    for dever in deveres:
+        dias_para_entrega = dever.dias_para_entrega()
+        if dias_para_entrega == 1:
+            dever.cor_fundo = "vermelho"
+        elif dias_para_entrega == 2:
+            dever.cor_fundo = "amarelo"
+        elif dias_para_entrega == 3:
+            dever.cor_fundo = "verde"
+        else:
+            dever.cor_fundo = "normal"
+    
+    return render(request, 'dever/dever_list.html', {'deveres': deveres})
+
+def dever_detail(request, pk):
+    dever = get_object_or_404(DeverDeCasa, pk=pk)
+    return render(request, 'dever/dever_detail.html', {'dever': dever})
+
+def dever_create(request):
+    if request.method == 'POST':
+        form = DeverDeCasaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dever_list')
+    else:
+        form = DeverDeCasaForm()
+    
+    return render(request, 'dever/dever_form.html', {'form': form})
+
+def dever_update(request, pk):
+    dever = get_object_or_404(DeverDeCasa, pk=pk)
+    if request.method == 'POST':
+        form = DeverDeCasaForm(request.POST, instance=dever)
+        if form.is_valid():
+            form.save()
+            return redirect('dever_list')
+    else:
+        form = DeverDeCasaForm(instance=dever)
+    
+    return render(request, 'dever/dever_form.html', {'form': form})
+
+def dever_delete(request, pk):
+    dever = get_object_or_404(DeverDeCasa, pk=pk)
+    if request.method == 'POST':
+        dever.delete()
+        return redirect('dever_list')
+    
+    return render(request, 'dever/dever_confirm_delete.html', {'dever': dever})
+
 

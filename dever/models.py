@@ -5,6 +5,9 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from django.db import models
+from datetime import date
+
 # class User(AbstractUser):
 #     # Campos adicionais para seu modelo User personalizado
 
@@ -63,9 +66,6 @@ class Aluno(models.Model):
         return self.nome_aluno
 
 
-
-
-
 class Livro(models.Model):
     nome_livro = models.CharField(max_length=100)
 
@@ -78,11 +78,16 @@ class DeverDeCasa(models.Model):
     fk_professor = models.ForeignKey(Professor, on_delete=models.CASCADE, related_name="deveres")
     fk_materia = models.ForeignKey(Materia, on_delete=models.CASCADE)
     fk_livro = models.ForeignKey(Livro, on_delete=models.CASCADE, null=True, blank=True)
-    descricao = models.TextField()
+    dever = models.TextField()
+    data_entrega = models.DateField() 
     data_postagem = models.DateTimeField(auto_now_add=True)
 
+    def dias_para_entrega(self):
+        # Retorna a quantidade de dias para o prazo de entrega
+        return (self.data_entrega - date.today()).days
+
     def __str__(self):
-        return f"Dever de {self.fk_materia.nome_materia} - {self.descricao} - {self.data_postagem.date()}"
+        return f"Dever de {self.fk_materia.nome_materia} - {self.dever} - {self.data_entrega.date()}- {self.data_postagem.date()}"
 
     # def is_accessible_by(self, user):
     #     if user.role == User.COORDENADOR:

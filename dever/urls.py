@@ -1,22 +1,10 @@
-# from django.urls import path
-# from .views import DeverListView, DeverDetailView, DeverCreateView
-
-# urlpatterns = [
-#     path('deveres/', DeverListView.as_view(), name='dever_list'),
-#     path('dever/<int:pk>/', DeverDetailView.as_view(), name='dever_detail'),
-#     path('dever/criar/', DeverCreateView.as_view(), name='dever_create'),
-# ]
-
-
-# dever/urls.py
-
 from django.urls import path
-from .views import DeverListView, DeverDetailView, DeverCreateView, DeverUpdateView, DeverDeleteView
+from .views import dever_list, dever_detail, dever_create, dever_update, dever_delete
 
 urlpatterns = [
-    path('', DeverListView.as_view(), name='dever_list'),
-    path('<int:pk>/', DeverDetailView.as_view(), name='dever_detail'),
-    path('novo/', DeverCreateView.as_view(), name='dever_create'),
-    path('<int:pk>/editar/', DeverUpdateView.as_view(), name='dever_update'),
-    path('<int:pk>/deletar/', DeverDeleteView.as_view(), name='dever_delete'),
+    path('', dever_list, name='dever_list'),
+    path('<int:pk>/', dever_detail, name='dever_detail'),
+    path('novo/', dever_create, name='dever_create'),
+    path('<int:pk>/editar/', dever_update, name='dever_update'),
+    path('<int:pk>/deletar/', dever_delete, name='dever_delete'),
 ]
