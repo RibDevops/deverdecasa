@@ -62,7 +62,32 @@
         .btn-delete { background-color: #F44336; }
         .btn-novo { background-color: #28a745; }
 
-        
+        /* Responsividade para celular */
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            th { display: none; }
+            td {
+                position: relative;
+                padding-left: 50%;
+            }
+            td::before {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+            td:nth-of-type(1)::before { content: "DIA"; }
+            td:nth-of-type(2)::before { content: "MATÉRIA"; }
+            td:nth-of-type(3)::before { content: "DEVER"; }
+            td:nth-of-type(4)::before { content: "AÇÕES"; }
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -75,6 +100,7 @@
                     <th>DIA</th>
                     <th>MATÉRIA</th>
                     <th>DEVER</th>
+                    <th>AÇÕES</th>
                 </tr>
             </thead>
             <tbody>
@@ -83,6 +109,11 @@
                         <td>{{ dever.data_formatada }}</td>
                         <td>{{ dever.fk_materia.nome_materia }}</td>
                         <td>{{ dever.dever }}</td>
+                        <td>
+                            <a href="{% url 'dever_detail' dever.pk %}" class="btn btn-detail">Detalhes</a><p>
+                            <a href="{% url 'dever_update' dever.pk %}" class="btn btn-edit">Editar</a><p>
+                            <a href="{% url 'dever_delete' dever.pk %}" class="btn btn-delete">Excluir</a><p>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
