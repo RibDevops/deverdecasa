@@ -12,11 +12,6 @@ from datetime import datetime
 from datetime import datetime, date
 import locale
 
-try:
-    locale.setlocale(locale.LC_TIME, "pt_BR.UTF-8")
-except locale.Error:
-    print("Locale 'pt_BR.UTF-8' não disponível. Usando locale padrão.")
-    locale.setlocale(locale.LC_TIME, "en_US.UTF-8")  # Usar o locale em inglês, por exemplo
 
 
 # class User(AbstractUser):
@@ -108,8 +103,18 @@ class DeverDeCasa(models.Model):
         return (self.data_entrega - date.today()).days
     
     def data_formatada(self):
-        # Retorna a data de entrega no formato "8 sexta"
-        return self.data_entrega.strftime("%d %a")
+        # Lista de dias da semana em inglês
+        dias_da_semana_ingles = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        # Lista de dias da semana em português
+        dias_da_semana_portugues = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom']
+        
+        # Formatar a data para o dia e o dia da semana em inglês
+        dia_semana_ingles = self.data_entrega.strftime("%a")  # Exemplo: 'Mon', 'Tue', etc.
+        dia_semana_portugues = dias_da_semana_portugues[dias_da_semana_ingles.index(dia_semana_ingles)]
+        
+        # Retornar a data no formato desejado: "08 seg"
+        return self.data_entrega.strftime(f"%d {dia_semana_portugues}")
+
 
     def __str__(self):
         return f"Dever de {self.fk_materia.nome_materia} - {self.dever} - {self.dever.data_formatada()}"
