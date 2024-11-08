@@ -23,11 +23,16 @@
             text-align: center;
             border-radius: 10px; /* Bordas arredondadas */
             overflow: hidden; /* Para evitar que o conteúdo transborde */
+            
+
+            border-collapse: separate;
+            border-spacing: 0 5px; /* 10px de espaço entre as linhas */
         }
 
         /* Estilo para as células (th, td) */
         th, td {
-            padding: 8px;
+            /* padding: 8px; */
+            padding: 10px; /* Aumenta o espaço dentro das células */
             text-align: center;
     
            
@@ -81,44 +86,7 @@
             td:nth-of-type(4)::before { content: "AÇÕES"; }
         }
 
-        /* Estilos responsivos para tabelas */
-@media screen and (max-width: 767px) {
-    .scs-paragraph:not(.scs-paragraph-edit) table {
-        border: 0;
-    }
 
-    .scs-paragraph:not(.scs-paragraph-edit) table thead {
-        clip: rect(0 0 0 0);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-    }
-
-    .scs-paragraph:not(.scs-paragraph-edit) table tr {
-        display: block;
-        margin-bottom: .625em;
-        border-bottom: 3px solid #ddd;
-    }
-
-    .scs-paragraph:not(.scs-paragraph-edit) table td {
-        display: block;
-        text-align: right;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .scs-paragraph:not(.scs-paragraph-edit) table td::before {
-        content: attr(data-label);
-        float: left;
-        font-weight: bold;
-    }
-
-    .scs-paragraph:not(.scs-paragraph-edit) table td:last-child {
-        border-bottom: 0;
-    }
-}
 
     </style>
 </head>
@@ -129,19 +97,19 @@
         <table>
             <thead>
                 <tr>
-                    <th scope="col">DIA</th>
-                    <th scope="col">MATÉRIA</th>
-                    <th scope="col">DEVER</th>
-                    <th scope="col">AÇÕES</th>
+                    <th>DIA</th>
+                    <th>MATÉRIA</th>
+                    <th>DEVER</th>
+                    <th>AÇÕES</th>
                 </tr>
             </thead>
             <tbody>
                 {% for dever in deveres %}
                     <tr class="{{ dever.cor_fundo|default:'normal' }}">
-                        <td data-label="DIA">{{ dever.data_entrega }}</td>
-                        <td data-label="MATÉRIA">{{ dever.fk_materia.nome_materia }}</td>
-                        <td data-label="DEVER">{{ dever.dever }}</td>
-                        <td data-label="AÇÕES">
+                        <td>{{ dever.data_formatada }}</td>
+                        <td>{{ dever.fk_materia.nome_materia }}</td>
+                        <td>{{ dever.dever }}</td>
+                        <td>
                             <a href="{% url 'dever_detail' dever.pk %}" class="btn btn-detail">Detalhes</a><p>
                             <a href="{% url 'dever_update' dever.pk %}" class="btn btn-edit">Editar</a><p>
                             <a href="{% url 'dever_delete' dever.pk %}" class="btn btn-delete">Excluir</a><p>

@@ -25,12 +25,16 @@ def dever_list(request):
     deveres = DeverDeCasa.objects.all().order_by('data_entrega')
     for dever in deveres:
         dias_para_entrega = dever.dias_para_entrega()
-        if dias_para_entrega == 1:
+        horas_restantes = dever.horas_restantes()
+        print(f'data_entrega - {dever.data_entrega}')
+        print(f'dias_para_entrega - {dias_para_entrega}')
+        print(f'horas_restantes - {horas_restantes}')
+        if dias_para_entrega <= 1:
             dever.cor_fundo = "vermelho"
+        # elif dias_para_entrega == 1:
+        #     dever.cor_fundo = "vermelho"
         elif dias_para_entrega == 2:
             dever.cor_fundo = "amarelo"
-        elif dias_para_entrega == 3:
-            dever.cor_fundo = "verde"
         else:
             dever.cor_fundo = "verde"
     

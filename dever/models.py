@@ -7,6 +7,14 @@ from django.db import models
 
 from django.db import models
 from datetime import date
+from datetime import datetime
+
+from datetime import datetime, date
+import locale
+
+# Definindo o locale para português do Brasil
+locale.setlocale(locale.LC_TIME, "pt_BR.UTF-8")
+
 
 # class User(AbstractUser):
 #     # Campos adicionais para seu modelo User personalizado
@@ -82,12 +90,27 @@ class DeverDeCasa(models.Model):
     data_entrega = models.DateField() 
     data_postagem = models.DateTimeField(auto_now_add=True)
 
+    # from datetime import datetime
+
+    def horas_restantes(self):
+        agora = datetime.now()
+        # Converte `self.data_entrega` para um objeto `datetime` no mesmo horário de `agora`
+        data_entrega_datetime = datetime.combine(self.data_entrega, agora.time())
+        delta = data_entrega_datetime - agora
+        return delta.total_seconds() // 3600  # Retorna as horas restantes
+
+    
     def dias_para_entrega(self):
         # Retorna a quantidade de dias para o prazo de entrega
         return (self.data_entrega - date.today()).days
+    
+    def data_formatada(self):
+        # Retorna a data de entrega no formato "8 sexta"
+        return self.data_entrega.strftime("%d %a")
 
     def __str__(self):
-        return f"Dever de {self.fk_materia.nome_materia} - {self.dever} - {self.data_entrega.date()}- {self.data_postagem.date()}"
+        return f"Dever de {self.fk_materia.nome_materia} - {self.dever} - {self.dever.data_formatada()}"
+
 
     # def is_accessible_by(self, user):
     #     if user.role == User.COORDENADOR:
