@@ -12,8 +12,11 @@ from datetime import datetime
 from datetime import datetime, date
 import locale
 
-# Definindo o locale para português do Brasil
-locale.setlocale(locale.LC_TIME, "pt_BR.UTF-8")
+try:
+    locale.setlocale(locale.LC_TIME, "pt_BR.UTF-8")
+except locale.Error:
+    print("Locale 'pt_BR.UTF-8' não disponível. Usando locale padrão.")
+    locale.setlocale(locale.LC_TIME, "en_US.UTF-8")  # Usar o locale em inglês, por exemplo
 
 
 # class User(AbstractUser):
