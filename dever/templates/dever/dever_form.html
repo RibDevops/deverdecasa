@@ -1,26 +1,98 @@
-{% load static %}
+verificar e ajustar:
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adicionar Novo Dever</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Adicionar Novo Dever de Casa</h1>
-    </header>
+    
     <div class="container">
+        <header>
+            <h1>Adicionar Novo Dever de Casa</h1>
+        </header>
         <div class="card">
-            <form method="post">
+            <form method="post" id="dever-form">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Salvar</button>
+                <label for="id_fk_escola">Escola:</label>
+                <select id="id_fk_escola" name="fk_escola" class="form-control">
+                    <option value="">Selecione uma Escola</option>
+                    {% for escola in escolas %}
+                        <option value="{{ escola.id }}">{{ escola.nome_escola }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="id_fk_professor">Professor:</label>
+                <select id="id_fk_professor" name="fk_professor" class="form-control">
+                    <option value="">Selecione um Professor</option>
+                </select>
+
+                <label for="id_fk_materia">Matéria:</label>
+                <input id="id_fk_materia" name="fk_materia" class="form-control" readonly>
+                <input type="hidden" id="id_fk_materia_id" name="fk_materia">
+
+
+                <label for="id_fk_livro">Livro:</label>
+                <select id="id_fk_livro" name="fk_livro" class="form-control">
+                    <option value="">Selecione um Livro</option>
+                </select>
+
+                <label for="id_dever">Dever:</label>
+                <textarea id="id_dever" name="dever" class="form-control"></textarea>
+
+                <label for="id_data_entrega">Data de Entrega:</label>
+                <input type="date" id="id_data_entrega" name="data_entrega" class="form-control">
+
+                <button type="submit" class="btn btn-primary mt-3">Salvar</button>
             </form>
-            <a href="{% url 'dever_list' %}" class="btn">Voltar para a Lista</a>
         </div>
     </div>
+
+    <script>
+        document.getElementById("id_fk_escola").addEventListener("change", function() {
+            var escolaId = this.value;
+            var professorSelect = document.getElementById("id_fk_professor");
+            professorSelect.innerHTML = '<option value="">Selecione um Professor</option>';
+
+            fetch(`/ajax/get-professores/${escolaId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(professor => {
+                        var option = document.createElement("option");
+                        option.value = professor.id;
+                        option.textContent = professor.nome;
+                        professorSelect.appendChild(option);
+                    });
+                });
+        });
+
+        document.getElementById("id_fk_professor").addEventListener("change", function() {
+        var professorId = this.value;
+        fetch(`/ajax/get-materia/${professorId}/`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("id_fk_materia").value = data.nome; // Exibe o nome da matéria para o usuário
+                document.getElementById("id_fk_materia_id").value = data.id; // Define o ID da matéria para envio
+                var materiaId = data.id;
+
+                var livroSelect = document.getElementById("id_fk_livro");
+                livroSelect.innerHTML = '<option value="">Selecione um Livro</option>';
+                fetch(`/ajax/get-livros/${materiaId}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(livro => {
+                            var option = document.createElement("option");
+                            option.value = livro.id;
+                            option.textContent = livro.nome;
+                            livroSelect.appendChild(option);
+                        });
+                    });
+            });
+    });
+
+    </script>
 </body>
 </html>

@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'api_rest',
     'dever',
+    'login',
+    
 
 ]
 
@@ -97,16 +99,16 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # 
-DATABASES = {'default': dj_database_url.config(default='postgresql://deverdecasa_db_user:U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj@dpg-cskh7opu0jms73bc4r20-a.oregon-postgres.render.com/deverdecasa_db', conn_max_age=600)}
+# DATABASES = {'default': dj_database_url.config(default='postgresql://deverdecasa_db_user:U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj@dpg-cskh7opu0jms73bc4r20-a.oregon-postgres.render.com/deverdecasa_db', conn_max_age=600)}
 
 # DATABASES = {'default': dj_database_url.config(default='postgresql://deverdecasa_db_user:U3fHj0MjoE1AHGSuHizRIDMHDSsDkbwj@dpg-cskh7opu0jms73bc4r20-a/deverdecasa_db', conn_max_age=600)}
 # DATABASES = {'default': dj_database_url.config(default='postgresql://postgres:postgres@localhost:5432/deverdecasa_db', conn_max_age=600)}
@@ -167,3 +169,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ORIGINS = [
     'http://localhost:8080',
 ]
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = "/"  # new
+LOGIN_URL = 'login'  # Ou '/login/' dependendo de como sua URL foi definida
+
+# settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

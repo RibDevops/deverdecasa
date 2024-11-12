@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+        {{form_login.username.errors}}
+        <label>Username: </label>
+        {{form_login.username}}
+    </div>
+
+    <div class="form-group">
+        {{form_login.password.errors}}
+        <label>Senha: </label>
+        {{form_login.password}}
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Enviar" class="btn btn-primary">
+    </div>
+</form>
+<!-- registration/login.html -->
+<p><a href="{% url 'reset_password' %}">Forgot password?</a></p>
+
+</body>
+</html>

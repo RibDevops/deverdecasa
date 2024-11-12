@@ -40,11 +40,6 @@ import locale
 #         verbose_name="user permissions"
 #     )
 
-class Materia(models.Model):
-    nome_materia = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.nome_materia
 
 class Escola(models.Model):
     nome_escola = models.CharField(max_length=100)
@@ -53,15 +48,28 @@ class Escola(models.Model):
         return self.nome_escola
 
 
+class Materia(models.Model):
+    nome_materia = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nome_materia
+
+
 class Professor(models.Model):
-    fk_escola = models.ForeignKey(Escola, on_delete=models.CASCADE, related_name="Professores")
-    fk_materia = models.ForeignKey(Materia, on_delete=models.CASCADE, related_name="Materia")
+    fk_escola = models.ForeignKey(Escola, on_delete=models.CASCADE, related_name="professores")
+    fk_materia = models.ForeignKey(Materia, on_delete=models.CASCADE, related_name="materias_professor")
     nome_professor = models.CharField(max_length=100)
-    # usuario = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nome_professor
 
+
+class Livro(models.Model):
+    fk_materia = models.ForeignKey(Materia, on_delete=models.CASCADE, related_name="materias_livro")
+    nome_livro = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nome_livro
 
 class Aluno(models.Model):
     fk_escola = models.ForeignKey(Escola, on_delete=models.CASCADE, related_name="alunos")
@@ -70,14 +78,6 @@ class Aluno(models.Model):
 
     def __str__(self):
         return self.nome_aluno
-
-
-class Livro(models.Model):
-    nome_livro = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.nome_livro
-
 
 class DeverDeCasa(models.Model):
     fk_escola = models.ForeignKey(Escola, on_delete=models.CASCADE, related_name="deveres")
@@ -128,3 +128,4 @@ class DeverDeCasa(models.Model):
     #     elif user.role == User.PAI:
     #         return True  # Pais podem ver todos os deveres
     #     return False
+
