@@ -1,12 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+ 
 
-
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Deveres</title>
-  
     <style type="text/css">
         /* Estilo para a div centralizada */
         .container {
@@ -64,10 +59,9 @@
 
         
     </style>
-</head>
-<body>
+
     <div class="container">
-        <a href="{% url 'dever_create' %}" class="btn btn-novo">Adicionar Novo Dever</a>
+        
         <h1>Lista de Deveres</h1>
         <table>
             <thead>
@@ -88,5 +82,5 @@
             </tbody>
         </table>
     </div>
-</body>
-</html>
+   
+    {% endblock %}

@@ -2,22 +2,25 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from ..models import DeverDeCasa
-
 from datetime import date, timedelta
 from django.shortcuts import render
 from ..models import DeverDeCasa
-
 from django.shortcuts import render
 from ..models import DeverDeCasa
 from datetime import date
-
 from django.views.generic import ListView
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from ..models import DeverDeCasa
 from ..forms import DeverDeCasaForm  # Assumindo que você tenha um formulário personalizado
 from datetime import date
+from django.contrib.auth.decorators import login_required
+from ..models import Escola  # Certifique-se de importar o modelo Escola
+from django.shortcuts import render, redirect
+from ..forms import DeverDeCasaForm
+from ..models import Escola
+from django.contrib.auth.decorators import login_required
+
 
 def dever_list(request):
     deveres = DeverDeCasa.objects.all().order_by('data_entrega')
@@ -42,12 +45,10 @@ def dever_detail(request, pk):
     dever = get_object_or_404(DeverDeCasa, pk=pk)
     return render(request, 'dever/dever_detail.html', {'dever': dever})
 
-from ..models import Escola  # Certifique-se de importar o modelo Escola
 
-from django.shortcuts import render, redirect
-from ..forms import DeverDeCasaForm
-from ..models import Escola
 
+# @login_required
+@login_required(login_url='/login/')
 def dever_create(request):
     if request.method == 'POST':
         form = DeverDeCasaForm(request.POST)
@@ -60,10 +61,10 @@ def dever_create(request):
             print("Descrição do dever:", form.cleaned_data.get('dever'))
             print("Data de entrega:", form.cleaned_data.get('data_entrega'))
 
-
-
             form.save()
-            return redirect('dever_list')
+            # return redirect('lista')
+            return redirect('dever:dever_list')
+
         else:
             print(form.errors)  # Isso ajudará a ver os erros no console
     else:
@@ -73,7 +74,7 @@ def dever_create(request):
     return render(request, 'dever/dever_form.html', {'form': form, 'escolas': escolas})
 
 
-
+@login_required
 def dever_update(request, pk):
     dever = get_object_or_404(DeverDeCasa, pk=pk)
     if request.method == 'POST':
@@ -86,6 +87,7 @@ def dever_update(request, pk):
     
     return render(request, 'dever/dever_form.html', {'form': form})
 
+@login_required
 def dever_delete(request, pk):
     dever = get_object_or_404(DeverDeCasa, pk=pk)
     if request.method == 'POST':

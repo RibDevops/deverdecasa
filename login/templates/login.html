@@ -2,30 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
 </head>
 <body>
 <form method="post">
     {% csrf_token %}
-
+    
     <div class="form-group">
-        {{form_login.username.errors}}
+        {{ form_login.username.errors }}
         <label>Username: </label>
-        {{form_login.username}}
+        {{ form_login.username }}
     </div>
 
     <div class="form-group">
-        {{form_login.password.errors}}
+        {{ form_login.password.errors }}
         <label>Senha: </label>
-        {{form_login.password}}
+        {{ form_login.password }}
     </div>
 
     <div class="form-group">
         <input type="submit" value="Enviar" class="btn btn-primary">
     </div>
 </form>
-<!-- registration/login.html -->
-<p><a href="{% url 'reset_password' %}">Forgot password?</a></p>
+
+<p><p><a href="{% url 'login:reset_password' %}">Esqueceu a senha?</a></p>
 
 </body>
 </html>

@@ -5,11 +5,16 @@ from django.urls import path
 from . import views  # Importe suas views
 from django.urls import path
 from django.contrib.auth import views as auth_views
-
+app_name = 'login' 
 urlpatterns = [
-    path('logar_usuario', logar_usuario, name="logar_usuario"),
-    path('cadastrar_usuario', cadastrar_usuario, name="cadastrar_usuario"),
-    path('index', index, name="index"),
+    # path('logar_usuario', logar_usuario, name="logar_usuario"),
+    # path('cadastrar_usuario', cadastrar_usuario, name="cadastrar_usuario"),
+    # path('index', index, name="index"),
+    # path('logout/', views.logout_view, name='logout'),
+ 
+    path('', views.home, name='home'),  # URL para a home
+    path('registro/', views.registro_view, name='registro'),
+    path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
 
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset.html'), name='reset_password'),

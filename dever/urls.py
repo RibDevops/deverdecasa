@@ -4,8 +4,10 @@ from dever.views.views_dever import *
 from django.urls import path
 from . import views
 
+app_name = 'dever' # Defina o namespace aqui
+
 urlpatterns = [
-    path('', dever_list, name='dever_list'),
+    path('lista/', dever_list, name='dever_list'),
     path('<int:pk>/', dever_detail, name='dever_detail'),
     path('novo/', dever_create, name='dever_create'),
     path('<int:pk>/editar/', dever_update, name='dever_update'),

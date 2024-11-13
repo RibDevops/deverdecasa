@@ -136,13 +136,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_TZ = True
+
+AUTH_USER_MODEL = 'login.User'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -169,10 +171,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ORIGINS = [
     'http://localhost:8080',
 ]
+
+# settings.py
+# LOGIN_URL = '/login/'
+
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = "/"  # new
-LOGIN_URL = 'login'  # Ou '/login/' dependendo de como sua URL foi definida
 
 # settings.py
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
