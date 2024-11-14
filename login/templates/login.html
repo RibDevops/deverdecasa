@@ -1,31 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-<form method="post">
-    {% csrf_token %}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <a class="links" id="paracadastro"></a>
+    <a class="links" id="paralogin"></a>
     
-    <div class="form-group">
-        {{ form_login.username.errors }}
-        <label>Username: </label>
-        {{ form_login.username }}
-    </div>
+    <div class="content">      
+        <!--FORMULÁRIO DE LOGIN-->
+        <div id="login">
+            <form method="post" action="">
+                {% csrf_token %}
+                <h1>Login</h1> 
+                
+                <div class="form-group"> 
+                    {{ form_login.username.errors }}
+                    <label for="email_login">Seu usuário: </label>
+                    {{ form_login.username }}
+                </div>
+                <p></p>
+                <div class="form-group"> 
+                    {{ form_login.password.errors }}
+                    <label for="senha_login">Sua senha:   </label>
+                    {{ form_login.password }}
+                </div>
+                                
+                <div class="form-group"> 
+                    <input type="submit" value="Logar" class="btn btn-primary" /> 
+                </div>
+                
+            </form>
+        </div>
 
-    <div class="form-group">
-        {{ form_login.password.errors }}
-        <label>Senha: </label>
-        {{ form_login.password }}
-    </div>
-
-    <div class="form-group">
-        <input type="submit" value="Enviar" class="btn btn-primary">
-    </div>
-</form>
-
-<p><p><a href="{% url 'login:reset_password' %}">Esqueceu a senha?</a></p>
-
-</body>
-</html>
+{% endblock %}
