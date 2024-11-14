@@ -56,12 +56,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'api_rest',
+    # 'api_rest',
     'dever',
     'login',
+    'rolepermissions',
     
 
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -181,3 +184,5 @@ LOGOUT_REDIRECT_URL = "/"  # new
 
 # settings.py
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ROLEPERMISSIONS_MODULE = 'login.roles'

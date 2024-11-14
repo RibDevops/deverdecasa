@@ -1,0 +1,24 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card.border-vermelho {
+    border: 2px solid #ee6b78;
+}
+
+.card.border-amarelo {
+    border: 2px solid #ffc107;
+}
+
+.card.border-verde {
+    border: 2px solid #28a745;
+}
+
+.card.border-normal {
+    border: 2px solid #ffffff;
+}

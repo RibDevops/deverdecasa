@@ -1,6 +1,100 @@
 
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-Home
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeverDecasa - Sistema de Gestão de Deveres</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'dever:dever_list' %}">DeverDecasa</a>
+                <!-- Navbar conteúdo omitido para brevidade -->
+            </div>
+        </nav>
+    </header>
+    <main class="container mt-5">
+        <section class="row">
+            <div class="col-md-6">
+                <h1>Bem-vindo ao DeverDecasa!</h1>
+                <p>Sistema de Gestão de Deveres para uma Educação Mais Eficiente</p>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'images/deverdecasa-logo.png' %}" alt="DeverDecasa Logo" width="200">
+            </div>
+        </section>
+        <section class="mt-5">
+            <h2>Seus Deveres, Organizados!</h2>
+            <div class="row">
+                {% for dever in deveres %}
+                <div class="col-md-4 mb-3">
+                    <div class="card border-{{ dever.cor_fundo|default:'normal' }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ dever.fk_materia.nome_materia }}</h5>
+                            <p class="card-text">{{ dever.dever }}</p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    Data de Entrega: {{ dever.data_formatada }}
+                                    {% if dever.cor_fundo == 'ermelho' %}
+                                        <i class="fas fa-exclamation-circle text-danger"></i> Urgente!
+                                    {% elif dever.cor_fundo == 'amarelo' %}
+                                        <i class="fas fa-clock text-warning"></i> Próximo!
+                                    {% else %}
+                                        <i class="fas fa-check-circle text-success"></i> Em Dia!
+                                    {% endif %}
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        <section class="mt-5">
+            <h2>Benefícios para Todos!</h2>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-chalkboard-teacher fa-3x text-info mb-3"></i>
+                    <h5>Para Professores</h5>
+                    <ul class="list-unstyled">
+                        <li>✔️ Envio simplificado de deveres e atividades</li>
+                        <li>✔️ Ferramentas de constrole</li>
+                        <li>✔️ Acesso em qualquer lugar com internet</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-user-graduate fa-3x text-success mb-3"></i>
+                    <h5>Para Alunos</h5>
+                    <ul class="list-unstyled">
+                        <li>✔️ Organização de deveres em um único lugar</li>
+                        <li>✔️ Lembretes e notificações para evitar esquecimentos</li>
+                        <li>✔️ Maior autonomia para planejar e cumprir tarefas</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-user-tie fa-3x text-primary mb-3"></i>
+                    <h5>Para Coordenadores</h5>
+                    <ul class="list-unstyled">
+                        <li>✔️ Monitoramento centralizado da logística dos deveres</li>
+                        <li>✔️ Relatórios completos para decisões estratégicas</li>
+                        <li>✔️ Suporte para a melhoria contínua do ensino</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+    <footer class="bg-dark text-light text-center p-3 mt-5">
+        <p>DeverDecasa &copy; 2024 - Sistema de Gestão de Deveres</p>
+    </footer>
+</body>
+</html>
 
 {% endblock %}

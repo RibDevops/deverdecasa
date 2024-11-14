@@ -1,0 +1,42 @@
+from django.shortcuts import render, redirect, get_object_or_404
+from..forms import LivrosForm
+from..models import Livro
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
+
+# Views para Livro
+def lista_livro(request):
+    livros = Livro.objects.all()
+    return render(request, 'livros/lista.html', {'livros': livros})
+
+def cria_livro(request):
+    if request.method == 'POST':
+        form = LivrosForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dever:lista_livro')
+    else:
+        form = LivrosForm()
+    return render(request, 'livros/form.html', {'form': form})
+
+def atualiza_livro(request, pk):
+    livro = get_object_or_404(Livro, pk=pk)
+    if request.method == 'POST':
+        form = LivrosForm(request.POST, instance=livro)
+        if form.is_valid():
+            form.save()
+            return redirect('dever:lista_livro')
+    else:
+        form = LivrosForm(instance=livro)
+    return render(request, 'livros/form.html', {'form': form})
+
+
+def deleta_livro(request, pk):
+    livro = get_object_or_404(Livro, pk=pk)
+    try:
+        livro.delete()
+        messages.success(request, "Livro deletado com sucesso.")
+    except Exception as e:
+        messages.error(request, f"Erro ao deletar: {str(e)}")
+    return redirect('dever:lista_livro')

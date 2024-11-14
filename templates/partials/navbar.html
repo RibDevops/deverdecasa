@@ -1,30 +1,48 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'dever:dever_list' %}">Home</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'dever:dever_list' %}">Lista de Dever</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'dever:dever_create' %}">Adicionar Novo Dever</a>
-              </li>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'dever:dever_list' %}">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               {% if user.is_authenticated %}
-                  <li class="nav-item">
-                      <a class="nav-link" href="{% url 'login:logout' %}">Logout</a>
-                  </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dever:dever_list' %}">Lista de Deveres</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dever:dever_create' %}">Novo Dever</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dever:lista_escolas' %}">Lista de Escolas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dever:lista_alunos' %}">Lista de Alunos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dever:lista_turma' %}">Lista de Turmas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dever:lista_livro' %}">Lista de Livros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dever:lista_materia' %}">Lista de Matérias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'dever:lista_professor' %}">Lista de Professores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login:logout' %}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login:lista_usuarios' %}">Lista de Usuários</a>
+                </li>
               {% else %}
-                  <li class="nav-item">
-                      <a class="nav-link" href="{% url 'login:login' %}">Login</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="{% url 'login:registro' %}">Registro</a>
-                  </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login:login' %}">Login</a>
+                </li>
               {% endif %}
-          </ul>
-      </div>
-  </div>
-</nav>
+            </ul>
+        </div>
+    </div>
+  </nav>

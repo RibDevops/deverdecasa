@@ -1,66 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
- 
-
-    <style type="text/css">
-        /* Estilo para a div centralizada */
-        .container {
-            width: 350px;
-            margin: 0 auto;
-        }
-
-        /* Estilo para a tabela com borda arredondada */
-        table {
-            font-family: Arial, sans-serif;
-            font-size:medium;
-            width: 100%;
-            border-collapse: collapse;
-            text-align: center;
-            border-radius: 10px; /* Bordas arredondadas */
-            overflow: hidden; /* Para evitar que o conteúdo transborde */
-            
-
-            border-collapse: separate;
-            border-spacing: 0 5px; /* 10px de espaço entre as linhas */
-        }
-
-        /* Estilo para as células (th, td) */
-        th, td {
-            /* padding: 8px; */
-            padding: 10px; /* Aumenta o espaço dentro das células */
-            text-align: center;
-    
-           
-            /* border-radius: 8px; Bordas arredondadas nas células */
-        }
-        tr {
-            background-color: #343a40;
-            color: #fff;
-        }
-
-        /* Estilos de fundo para cada categoria de prazo */
-        .vermelho { background-color: #dc3545; }
-        .amarelo { background-color: #ffc107; }
-        .verde { background-color: #28a745; }
-        .normal { background-color: #ffffff; }
-
-        /* Estilo dos botões */
-        .btn {
-            padding: 5px 10px;
-            text-decoration: none;
-            color: white;
-            border-radius: 8px;
-            font-size: 0.9em;
-        }
-        .btn-detail { background-color: #585855; }
-        .btn-edit { background-color: #007bff; }
-        .btn-delete { background-color: #F44336; }
-        .btn-novo { background-color: #28a745; }
-
-        
-    </style>
-
     <div class="container">
+        <!-- Bloco para exibir mensagens -->
+{% if messages %}
+<div>
+    {% for message in messages %}
+        <div class="
+            {% if message.tags %}alert alert-{{ message.tags }}{% endif %}
+        ">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+        <p></p>
+        <p><a href="{% url 'dever:dever_create' %}" class="btn btn-primary">Novo Dever</a></p>
         
         <h1>Lista de Deveres</h1>
         <table>
@@ -69,6 +23,7 @@
                     <th>DIA</th>
                     <th>MATÉRIA</th>
                     <th>DEVER</th>
+                    <th>AÇÕES</th>
                 </tr>
             </thead>
             <tbody>
@@ -77,6 +32,12 @@
                         <td>{{ dever.data_formatada }}</td>
                         <td>{{ dever.fk_materia.nome_materia }}</td>
                         <td>{{ dever.dever }}</td>
+                        <td>
+                            <a href="{% url 'dever:dever_update' dever.id %}" class="btn btn-warning">Editar</a>
+                            <a href="{% url 'dever:dever_delete' dever.id %}"                  class="btn btn-danger" 
+                            onclick="return confirm('Tem certeza que deseja deletar {{ dever.fk_materia.nome_materia }} - {{ dever.dever }}? Esta ação é irreversível!');">
+                            <i class="fas fa-trash-alt"></i>Excluir</a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

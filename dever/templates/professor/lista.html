@@ -1,0 +1,47 @@
+{% extends 'base.html' %} <!-- Se tiver um template base -->
+
+{% block content %}
+<h1>Lista de Professors</h1>
+<!-- Bloco para exibir mensagens -->
+{% if messages %}
+<div>
+    {% for message in messages %}
+        <div class="
+            {% if message.tags %}alert alert-{{ message.tags }}{% endif %}
+        ">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+<p><a href="{% url 'dever:cria_professor' %}" class="btn btn-primary">Cadastrar Novo Professores</a></p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome dos Professors</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for professor in professores %}
+            <tr>
+                <td>{{ professor.nome_professor }}</td>
+                <td>
+                    <a href="{% url 'dever:atualiza_professor' professor.pk %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'dever:deleta_professor' professor.pk %}" class="btn btn-danger" 
+                    onclick="return confirm('Tem certeza que deseja deletar {{ professor.nome_professor }}? Esta ação é irreversível!');">
+                    <i class="fas fa-trash-alt"></i> Deletar
+                    </a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="2">Nenhuma professor cadastrado.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+  
+{% endblock %}
+
