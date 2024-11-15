@@ -8,34 +8,31 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:dever_list' %}">Lista de Deveres</a>
+                    <a class="nav-link" href="{% url 'dever:dever_list' %}">Deveres</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:dever_create' %}">Novo Dever</a>
+                    <a class="nav-link" href="{% url 'dever:lista_escolas' %}">Escolas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:lista_escolas' %}">Lista de Escolas</a>
+                    <a class="nav-link" href="{% url 'dever:lista_alunos' %}">Alunos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:lista_alunos' %}">Lista de Alunos</a>
+                    <a class="nav-link" href="{% url 'dever:lista_turma' %}">Turmas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:lista_turma' %}">Lista de Turmas</a>
+                    <a class="nav-link" href="{% url 'dever:lista_livro' %}">Livros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:lista_livro' %}">Lista de Livros</a>
+                    <a class="nav-link" href="{% url 'dever:lista_materia' %}">Matérias</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:lista_materia' %}">Lista de Matérias</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:lista_professor' %}">Lista de Professores</a>
+                    <a class="nav-link" href="{% url 'dever:lista_professor' %}">Professores</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'login:logout' %}">Logout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login:lista_usuarios' %}">Lista de Usuários</a>
+                    <a class="nav-link" href="{% url 'login:lista_usuarios' %}">Usuários</a>
                 </li>
               {% else %}
                 <li class="nav-item">
