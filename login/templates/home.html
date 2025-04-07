@@ -8,6 +8,7 @@
                 <h1>Bem-vindo ao DeverDecasa!</h1>
                 <p>Sistema de Gestão de Deveres para uma Educação Mais Eficiente</p>
             </div>
+
             <div class="col-md-6">
                 <img src="{% static 'images/deverdecasa-logo.png' %}" alt="DeverDecasa Logo" width="200">
             </div>
@@ -24,7 +25,7 @@
                             <p class="card-text">
                                 <small class="text-muted">
                                     Data de Entrega: {{ dever.data_formatada }}
-                                    {% if dever.cor_fundo == 'ermelho' %}
+                                    {% if dever.cor_fundo == 'vermelho' %}
                                         <i class="fas fa-exclamation-circle text-danger"></i> Urgente!
                                     {% elif dever.cor_fundo == 'amarelo' %}
                                         <i class="fas fa-clock text-warning"></i> Próximo!

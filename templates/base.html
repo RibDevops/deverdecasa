@@ -5,12 +5,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}{% endblock %}</title>
+
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/deverdecasa-logo.png' %}" >
     
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
     
     <style type="text/css">
         :root {
@@ -102,9 +106,9 @@
     </div>
     
     <!-- JavaScript -->
-    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
-    <script src="{% static 'popper.min.js' %}" crossorigin="anonymous"></script>
-    <script src="{% static 'bootstrap.min.js' %}" crossorigin="anonymous"></script>
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}" crossorigin="anonymous"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}" crossorigin="anonymous"></script>
     
     {% block scripts %}{% endblock %}
 </body>

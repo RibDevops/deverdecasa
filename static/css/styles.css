@@ -1,17 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-    color: #333;
-}
-
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-}
-
 header {
     background: #333;
     color: #fff;
@@ -23,29 +9,91 @@ h1, h2 {
     color: #444;
 }
 
-button, .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 10px;
-    color: #fff;
-    background: #5a5af7;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: 5px;
+tr:hover {
+    opacity: 0.9;
+    transition: 0.2s;
 }
 
-button:hover, .btn:hover {
-    background: #333;
-}
 
-.card {
+/* .card {
     background: #fff;
     border: 1px solid #ddd;
     padding: 20px;
     margin: 10px 0;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+} */
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.card.border-vermelho {
+    border: 2px solid #ee6b78;
+}
+.card.border-amarelo {
+    border: 2px solid #ffc107;
+}
+
+.card.border-verde {
+    border: 2px solid #28a745;
+}
+
+.card.border-normal {
+    border: 2px solid #ffffff;
+}
+
+/* Estilos para as linhas coloridas */
+.vermelho {
+    background-color: #ffebee;
+    border-left: 4px solid #ee6b78;
+}
+.amarelo {
+    background-color: #fff8e1;
+    border-left: 4px solid #ffc107;
+}
+.verde {
+    background-color: #e8f5e9;
+    border-left: 4px solid #28a745;
+}
+.normal {
+    background-color: #ffffff;
+}
+
+/* Melhorias para mobile */
+@media (max-width: 768px) {
+    .table-responsive {
+        border: 0;
+    }
+    .table thead {
+        display: none;
+    }
+    .table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+    }
+    .table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .table td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 1rem;
+    }
+    .table td:last-child {
+        border-bottom: 0;
+    }
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+}
+
 
 

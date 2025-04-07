@@ -1,7 +1,7 @@
-{% extends 'base.html' %} <!-- Se tiver um template base -->
-
+{% extends 'base.html' %}
 {% block content %}
 <h1>Lista de Escolas</h1>
+
 <!-- Bloco para exibir mensagens -->
 {% if messages %}
 <div>
@@ -14,7 +14,9 @@
     {% endfor %}
 </div>
 {% endif %}
-<p><a href="{% url 'dever:cria_escolas' %}" class="btn btn-primary">Cadastrar Nova Escola</a></p>
+<p></p>
+<p>
+    <a href="{% url 'dever:cria_escolas' %}" class="btn btn-primary">Cadastrar Nova Escola</a></p>
 <table class="table">
     <thead>
         <tr>

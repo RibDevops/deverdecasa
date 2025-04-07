@@ -1,25 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container">
-        <!-- Bloco para exibir mensagens -->
+<h1>Lista de Deveres</h1>
+
+<!-- Bloco para exibir mensagens -->
 {% if messages %}
 <div>
     {% for message in messages %}
         <div class="
-            {% if message.tags %}alert alert-{{ message.tags }}{% endif %}
-        ">
+            {% if message.tags %}alert alert-{{ message.tags }}{% endif %}">
             {{ message }}
         </div>
     {% endfor %}
 </div>
-
 {% endif %}
         
-        
-        
-        <h1>Lista de Deveres</h1>
         <p></p>
-        <p><a href="{% url 'dever:dever_create' %}" class="btn btn-primary">Novo Dever</a></p>
+        <p>
+            <a href="{% url 'dever:dever_create' %}" class="btn btn-primary">Novo Dever</a></p>
         <table class="table">
             <thead>
                 <tr>
@@ -31,13 +28,15 @@
             </thead>
             <tbody>
                 {% for dever in deveres %}
-                    <tr class="{{ dever.cor_fundo|default:'normal' }}">
+                    
+                        <tr class="{{ dever.cor_fundo|default:'normal' }}">
+                    
                         <td>{{ dever.data_formatada }}</td>
                         <td>{{ dever.fk_materia.nome_materia }}</td>
                         <td>{{ dever.dever }}</td>
                         <td>
                             <a href="{% url 'dever:dever_update' dever.id %}" class="btn btn-warning">Editar</a>
-                            <a href="{% url 'dever:dever_delete' dever.id %}"                  class="btn btn-danger" 
+                            <a href="{% url 'dever:dever_delete' dever.id %}" class="btn btn-danger" 
                             onclick="return confirm('Tem certeza que deseja deletar {{ dever.fk_materia.nome_materia }} - {{ dever.dever }}? Esta ação é irreversível!');">
                             <i class="fas fa-trash-alt"></i>Excluir</a>
                         </td>
