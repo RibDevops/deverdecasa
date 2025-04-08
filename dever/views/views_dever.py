@@ -40,6 +40,7 @@ def dever_create(request):
     escolas = Escola.objects.all()
     return render(request, 'dever/dever_form.html', {'form': form, 'escolas': escolas})
 
+
 @login_required
 def dever_update(request, pk):
     dever = get_object_or_404(DeverDeCasa, pk=pk)

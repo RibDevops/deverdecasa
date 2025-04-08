@@ -1,45 +1,25 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'dever:dever_list' %}">Home</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:dever_list' %}">Deveres</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:lista_escolas' %}">Escolas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:lista_alunos' %}">Alunos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:lista_turma' %}">Turmas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:lista_livro' %}">Livros</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:lista_materia' %}">Matérias</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dever:lista_professor' %}">Professores</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login:logout' %}">Logout</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login:lista_usuarios' %}">Usuários</a>
-                </li>
-              {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login:login' %}">Login</a>
-                </li>
-              {% endif %}
-            </ul>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="navbar-nav">
+            <a class="nav-link" href="{% url 'login:home' %}" id="logo" class="text-light">Home</a>
+          {% if user.is_authenticated %}
+            <a class="nav-link" href="{% url 'dever:dever_list' %}">Deveres</a>
+            <a class="nav-link" href="{% url 'dever:lista_escolas' %}">Escolas</a>
+            <a class="nav-link" href="{% url 'dever:lista_alunos' %}">Alunos</a>
+            <a class="nav-link" href="{% url 'dever:lista_turma' %}">Turmas</a>
+            <a class="nav-link" href="{% url 'dever:lista_livro' %}">Livros</a>
+            <a class="nav-link" href="{% url 'dever:lista_materia' %}">Matérias</a>
+            <a class="nav-link" href="{% url 'dever:lista_professor' %}">Professores</a>
+            <a class="nav-link" href="{% url 'login:logout' %}">Logout</a>
+            <a class="nav-link" href="{% url 'login:lista_usuarios' %}">Usuários</a>
+          {% else %}
+            <a class="nav-link" href="{% url 'login:login' %}">Login</a>
+          {% endif %}
         </div>
+      </div>
     </div>
   </nav>

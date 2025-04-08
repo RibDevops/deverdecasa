@@ -108,7 +108,8 @@ def login_view(request):
                 # Crie a sessão com o ID da escola do usuário, caso o usuário tenha o campo 'escola'
                 if hasattr(user, 'escola'):
                     request.session['escola_id'] = user.escola.id
-                return redirect('login:home')
+                # return redirect('login:home')
+                return redirect('dever:dever_list')
 
             else:
                 messages.error(request, 'Credenciais inválidas.')

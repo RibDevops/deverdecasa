@@ -1,49 +1,54 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Lista de Deveres</h1>
+<div class="container-fluid py-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Lista de Deveres</h1>
+        <a href="{% url 'dever:dever_create' %}" class="btn btn-primary">Novo Dever</a>
+    </div>
 
-<!-- Bloco para exibir mensagens -->
-{% if messages %}
-<div>
-    {% for message in messages %}
-        <div class="
-            {% if message.tags %}alert alert-{{ message.tags }}{% endif %}">
-            {{ message }}
-        </div>
-    {% endfor %}
-</div>
-{% endif %}
-        
-        <p></p>
-        <p>
-            <a href="{% url 'dever:dever_create' %}" class="btn btn-primary">Novo Dever</a></p>
-        <table class="table">
-            <thead>
+    <!-- Mensagens -->
+    {% if messages %}
+    <div class="mb-3">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <!-- Tabela Responsiva -->
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
                 <tr>
                     <th>DIA</th>
                     <th>MATÉRIA</th>
                     <th>DEVER</th>
-                    <th>AÇÕES</th>
+                    <th class="text-end">AÇÕES</th>
                 </tr>
             </thead>
             <tbody>
                 {% for dever in deveres %}
-                    
-                        <tr class="{{ dever.cor_fundo|default:'normal' }}">
-                    
-                        <td>{{ dever.data_formatada }}</td>
-                        <td>{{ dever.fk_materia.nome_materia }}</td>
-                        <td>{{ dever.dever }}</td>
-                        <td>
-                            <a href="{% url 'dever:dever_update' dever.id %}" class="btn btn-warning">Editar</a>
-                            <a href="{% url 'dever:dever_delete' dever.id %}" class="btn btn-danger" 
-                            onclick="return confirm('Tem certeza que deseja deletar {{ dever.fk_materia.nome_materia }} - {{ dever.dever }}? Esta ação é irreversível!');">
-                            <i class="fas fa-trash-alt"></i>Excluir</a>
+                    <tr class="{{ dever.cor_fundo|default:'normal' }}">
+                        <td data-label="DIA">{{ dever.data_formatada }}</td>
+                        <td data-label="MATÉRIA">{{ dever.fk_materia.nome_materia }}</td>
+                        <td data-label="DEVER">{{ dever.dever }}</td>
+                        <td class="text-end">
+                            <div class="d-flex gap-2 justify-content-end">
+                                <a href="{% url 'dever:dever_update' dever.id %}" class="btn btn-warning btn-sm">Editar</a>
+                                <a href="{% url 'dever:dever_delete' dever.id %}" class="btn btn-danger btn-sm" 
+                                onclick="return confirm('Tem certeza que deseja deletar {{ dever.fk_materia.nome_materia }} - {{ dever.dever }}? Esta ação é irreversível!');">
+                                <i class="fas fa-trash-alt"></i> Excluir</a>
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-   
-    {% endblock %}
+</div>
+
+
+{% endblock %}

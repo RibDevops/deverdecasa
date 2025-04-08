@@ -1,0 +1,68 @@
+/* TABLE - Custom Styles */
+.vermelho {
+    background-color: #ffebee;
+    border-left: 4px solid #ee6b78;
+}
+
+.amarelo {
+    background-color: #fff8e1;
+    border-left: 4px solid #ffc107;
+}
+
+.verde {
+    background-color: #e8f5e9;
+    border-left: 4px solid #28a745;
+}
+
+/* Mobile table adjustments */
+@media (max-width: 767.98px) {
+    .table-responsive {
+        border: 0;
+        overflow-x: hidden; /* Remove barra de rolagem horizontal */
+    }
+    
+    .table thead {
+        display: none;
+    }
+    
+    .table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem; /* Aumentei o border-radius */
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Adicionei sombra */
+        transition: transform 0.2s ease-in-out; /* Efeito hover suave */
+    }
+    
+    .table tr:hover {
+        transform: translateY(-2px); /* Efeito de levantar ao passar o mouse */
+    }
+    
+    .table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #dee2e6;
+        padding: 0.75rem;
+    }
+    
+    .table td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 1rem;
+        color: #495057; /* Cor mais escura para melhor contraste */
+        flex-shrink: 0; /* Impede que o label quebre linha */
+    }
+    
+    .table td:last-child {
+        border-bottom: 0;
+        justify-content: flex-end;
+        gap: 0.5rem; /* Espaço entre botões */
+    }
+    
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+        min-width: 70px; /* Largura mínima para consistência */
+    }
+}
