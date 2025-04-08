@@ -5,7 +5,7 @@
         <header>
             <h1>Adicionar Novo Dever de Casa</h1>
         </header>
-        <div class="card">
+        
             <form method="post" id="dever-form">
                 {% csrf_token %}
                 <label for="id_fk_escola">Escola:</label>
@@ -39,7 +39,7 @@
 
                 <button type="submit" class="btn btn-primary mt-3">Salvar</button>
             </form>
-        </div>
+        
     </div>
 
     <script>
@@ -86,3 +86,5 @@
 
     </script>
 {% endblock %}
+
+

@@ -20,7 +20,9 @@ def cria_escolas(request):
     return render(request, 'escolas/form.html', {'form': form})
 
 def atualiza_escolas(request, pk):
+    print(pk)
     escola = get_object_or_404(Escola, pk=pk)
+    print(escola)
     if request.method == 'POST':
         form = EscolaForm(request.POST, instance=escola)
         if form.is_valid():

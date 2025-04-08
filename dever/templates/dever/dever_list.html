@@ -37,8 +37,8 @@
                         <td data-label="DEVER">{{ dever.dever }}</td>
                         <td class="text-end">
                             <div class="d-flex gap-2 justify-content-end">
-                                <a href="{% url 'dever:dever_update' dever.id %}" class="btn btn-warning btn-sm">Editar</a>
-                                <a href="{% url 'dever:dever_delete' dever.id %}" class="btn btn-danger btn-sm" 
+                                <a href="{% url 'dever:dever_update' dever.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                                <a href="{% url 'dever:dever_delete' dever.pk %}" class="btn btn-danger btn-sm" 
                                 onclick="return confirm('Tem certeza que deseja deletar {{ dever.fk_materia.nome_materia }} - {{ dever.dever }}? Esta ação é irreversível!');">
                                 <i class="fas fa-trash-alt"></i> Excluir</a>
                             </div>
@@ -49,6 +49,5 @@
         </table>
     </div>
 </div>
-
 
 {% endblock %}

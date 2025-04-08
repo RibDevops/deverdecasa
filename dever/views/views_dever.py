@@ -36,14 +36,15 @@ def dever_create(request):
             print(form.errors)  # Isso ajudará a ver os erros no console
     else:
         form = DeverDeCasaForm()
-
     escolas = Escola.objects.all()
     return render(request, 'dever/dever_form.html', {'form': form, 'escolas': escolas})
 
 
-@login_required
+# @login_required
 def dever_update(request, pk):
+    print(pk)
     dever = get_object_or_404(DeverDeCasa, pk=pk)
+    print(dever)
     if request.method == 'POST':
         form = DeverDeCasaForm(request.POST, instance=dever)
         if form.is_valid():
@@ -51,8 +52,7 @@ def dever_update(request, pk):
             return redirect('dever:dever_list')
     else:
         form = DeverDeCasaForm(instance=dever)
-    
-    return render(request, 'dever/dever_form.html', {'form': form})
+    return render(request, 'dever/form.html', {'form': form})
 
 @login_required
 def dever_delete(request, pk):
