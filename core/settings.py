@@ -188,9 +188,10 @@ CORS_ALLOW_ORIGINS = [
 # settings.py
 # LOGIN_URL = '/login/'
 
-LOGIN_REDIRECT_URL = '/'
-
-LOGOUT_REDIRECT_URL = "/"  # new
+# Configuração para redirecionamento de login
+LOGIN_URL = '/login/'  # Deve corresponder ao nome da sua URL de login
+LOGIN_REDIRECT_URL = 'home'  # Página para redirecionar após login bem-sucedido
+LOGOUT_REDIRECT_URL = 'home'  # Página para redirecionar após logout
 
 # settings.py
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

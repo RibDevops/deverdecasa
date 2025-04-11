@@ -19,6 +19,7 @@
                     <!-- Formulário -->
                     <form method="post" action="" class="needs-validation" novalidate>
                         {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ next }}">
                         
                         <!-- Mensagens de erro gerais -->
                         {% if form_login.non_field_errors %}
