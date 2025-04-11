@@ -1,85 +1,39 @@
 
 {% extends 'base.html' %}
 {% load static %}
+
+{% block title %}Página Inicial{% endblock %}
+
 {% block content %}
-
-        <section class="row">
-            <div class="col-md-6">
-                <h1>Bem-vindo ao DeverDecasa!</h1>
-                <p>Sistema de Gestão de Deveres para uma Educação Mais Eficiente</p>
-            </div>
-
-            <div class="col-md-6">
-                <img src="{% static 'images/deverdecasa-logo.png' %}" alt="DeverDecasa Logo" width="200">
-            </div>
-        </section>
-        <section class="mt-5">
-            <h2>Seus Deveres, Organizados!</h2>
-            <div class="row">
-                {% for dever in deveres %}
-                <div class="col-md-4 mb-3">
-                    <div class="card border-{{ dever.cor_fundo|default:'normal' }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ dever.fk_materia.nome_materia }}</h5>
-                            <p class="card-text">{{ dever.dever }}</p>
-                            <p class="card-text">
-                                <small class="text-muted">
-                                    Data de Entrega: {{ dever.data_formatada }}
-                                    {% if dever.cor_fundo == 'vermelho' %}
-                                        <i class="fas fa-exclamation-circle text-danger"></i> Urgente!
-                                    {% elif dever.cor_fundo == 'amarelo' %}
-                                        <i class="fas fa-clock text-warning"></i> Próximo!
-                                    {% else %}
-                                        <i class="fas fa-check-circle text-success"></i> Em Dia!
-                                    {% endif %}
-                                </small>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </section>
-        <section class="mt-5">
-            <h2>Benefícios para Todos!</h2>
-            <div class="row">
-                <div class="col-md-4 text-center">
-                    <i class="fas fa-chalkboard-teacher fa-3x text-info mb-3"></i>
-                    <h5>Para Professores</h5>
-                    <ul class="list-unstyled">
-                        <li>✔️ Envio simplificado de deveres e atividades</li>
-                        <li>✔️ Ferramentas de constrole</li>
-                        <li>✔️ Acesso em qualquer lugar com internet</li>
-                    </ul>
-                </div>
-                <div class="col-md-4 text-center">
-                    <i class="fas fa-user-graduate fa-3x text-success mb-3"></i>
-                    <h5>Para Alunos</h5>
-                    <ul class="list-unstyled">
-                        <li>✔️ Organização de deveres em um único lugar</li>
-                        <li>✔️ Lembretes e notificações para evitar esquecimentos</li>
-                        <li>✔️ Maior autonomia para planejar e cumprir tarefas</li>
-                    </ul>
-                </div>
-                <div class="col-md-4 text-center">
-                    <i class="fas fa-user-tie fa-3x text-primary mb-3"></i>
-                    <h5>Para Coordenadores</h5>
-                    <ul class="list-unstyled">
-                        <li>✔️ Monitoramento centralizado da logística dos deveres</li>
-                        <li>✔️ Relatórios completos para decisões estratégicas</li>
-                        <li>✔️ Suporte para a melhoria contínua do ensino</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+<div class="row">
+    <div class="col-md-8">
+        <h1 class="mb-4">Bem-vindo ao Nosso Site</h1>
+        <p class="lead">Este é um modelo responsivo com menu offcanvas para Django.</p>
         
-    </main>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Recursos</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Menu offcanvas para mobile</li>
+                    <li class="list-group-item">Design responsivo</li>
+                    <li class="list-group-item">Integração com Bootstrap 5</li>
+                    <li class="list-group-item">Área de usuário</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     
-    
-    <footer class="text-light text-center p-3 mt-5">
-        <!-- <p><a href="https://ribdev.netlify.app/"><img src="{% static 'images/rib2.png' %}" class="media-object  img-responsive img-thumbnail" alt="RIBDEV" width="200"></a></p> -->
-        
-    </footer>
-
-
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                Destaques
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Novidades</h5>
+                <p class="card-text">Confira nossas últimas atualizações e novidades.</p>
+                <a href="#" class="btn btn-primary">Saiba mais</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
