@@ -19,6 +19,9 @@
     <thead>
         <tr>
             <th>Nome dos Livros</th>
+            <th>Matéria</th>
+            <th>Escola</th>
+
             <th>Ações</th>
         </tr>
     </thead>
@@ -26,8 +29,10 @@
         {% for livro in livros %}
             <tr>
                 <td>{{ livro.nome_livro }}</td>
+                <td>{{ livro.fk_materia.nome_materia }}</td>
+                <td>{{ livro.fk_escola.nome_escola }}</td>
                 <td>
-                    <a href="{% url 'dever:atualiza_livro' livro.pk %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'dever:atualiza_livro' livro.pk %}" class="btn btn-warning"> <i class="fas fa-edit"></i>Editar</a>
                     <a href="{% url 'dever:deleta_livro' livro.pk %}" class="btn btn-danger" 
                     onclick="return confirm('Tem certeza que deseja deletar {{ livro.nome_livro }}? Esta ação é irreversível!');">
                     <i class="fas fa-trash-alt"></i> Deletar

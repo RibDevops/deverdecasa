@@ -18,7 +18,8 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Nome dos Professors</th>
+            <th>Nome dos Professores</th>
+            <th>Matéria</th>
             <th>Ações</th>
         </tr>
     </thead>
@@ -26,8 +27,9 @@
         {% for professor in professores %}
             <tr>
                 <td>{{ professor.nome_professor }}</td>
+                <td>{{ professor.fk_materia.nome_materia }}</td>
                 <td>
-                    <a href="{% url 'dever:atualiza_professor' professor.pk %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'dever:atualiza_professor' professor.pk %}" class="btn btn-warning"> <i class="fas fa-edit"></i>Editar</a>
                     <a href="{% url 'dever:deleta_professor' professor.pk %}" class="btn btn-danger" 
                     onclick="return confirm('Tem certeza que deseja deletar {{ professor.nome_professor }}? Esta ação é irreversível!');">
                     <i class="fas fa-trash-alt"></i> Deletar

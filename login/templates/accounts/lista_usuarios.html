@@ -17,7 +17,7 @@
             <td>{{ usuario.username }}</td>
             <td>{{ usuario.email }}</td>
             <td>
-                <a href="{% url 'login:update_user' usuario.id %}" class="btn btn-warning">Editar</a>
+                <a href="{% url 'login:update_user' usuario.id %}" class="btn btn-warning"><i class="fas fa-edit"></i>Editar</a>
                 <a href="{% url 'login:delete_user' usuario.id %}" class="btn btn-danger">Excluir</a>
             </td>
         </tr>

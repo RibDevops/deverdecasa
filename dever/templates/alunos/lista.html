@@ -19,6 +19,8 @@
     <thead>
         <tr>
             <th>Nome dos Alunos</th>
+            <th>Escola</th>
+            <th>Turma</th>
             <th>Ações</th>
         </tr>
     </thead>
@@ -26,8 +28,10 @@
         {% for aluno in alunos %}
             <tr>
                 <td>{{ aluno.nome_aluno }}</td>
+                <td>{{ aluno.fk_escola.nome_escola }}</td>
+                <td>{{ aluno.fk_turma.turma }}</td>
                 <td>
-                    <a href="{% url 'dever:atualiza_alunos' aluno.pk %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'dever:atualiza_alunos' aluno.pk %}" class="btn btn-warning"> <i class="fas fa-edit"></i>Editar</a>
                     <a href="{% url 'dever:deleta_alunos' aluno.pk %}" 
                     class="btn btn-danger" 
                     onclick="return confirm('Tem certeza que deseja deletar {{ aluno.nome_aluno }}? Esta ação é irreversível!');">

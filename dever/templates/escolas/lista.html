@@ -29,7 +29,7 @@
             <tr>
                 <td>{{ escola.nome_escola }}</td>
                 <td>
-                    <a href="{% url 'dever:atualiza_escolas' escola.pk %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'dever:atualiza_escolas' escola.pk %}" class="btn btn-warning"> <i class="fas fa-edit"></i>Editar</a>
                     <a href="{% url 'dever:deleta_escolas' escola.pk %}"                  class="btn btn-danger" 
                     onclick="return confirm('Tem certeza que deseja deletar {{ escola.nome_escola }}? Esta ação é irreversível!');">
                     <i class="fas fa-trash-alt"></i> Deletar

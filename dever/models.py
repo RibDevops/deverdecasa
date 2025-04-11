@@ -38,6 +38,7 @@ class Professor(models.Model):
 
 # **Model Livro**
 class Livro(models.Model):
+    fk_escola = models.ForeignKey(Escola, on_delete=models.CASCADE, related_name="livro_escola", verbose_name="Nome da escola", default=1)
     fk_materia = models.ForeignKey(Materia, on_delete=models.CASCADE, related_name="livro_materia", verbose_name="Matéria")
     nome_livro = models.CharField(max_length=100, verbose_name="Nome do livro")
 
@@ -174,11 +175,6 @@ class DeverDeCasa(models.Model):
 #         # Corrige o uso de `self.data_formatada()` ao invés de `self.dever.data_formatada()`
 #         return f"Dever de {self.fk_materia.nome_materia} - {self.dever} - {self.data_formatada()}"
 #         # Motivo: `self.data_formatada()` é o método da instância, o uso anterior `self.dever.data_formatada()` causaria erro.
-
-
-
-
-
 
 
 
