@@ -3,12 +3,15 @@ from..forms import MateriaForm
 from..models import Materia
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # Views para Materia
 
+@login_required
 def lista_materia(request):
     materia = Materia.objects.all()
     return render(request, 'materia/lista.html', {'materias': materia})
 
+@login_required
 def cria_materia(request):
     if request.method == 'POST':
         form = MateriaForm(request.POST)
@@ -19,6 +22,7 @@ def cria_materia(request):
         form = MateriaForm()
     return render(request, 'materia/form.html', {'form': form})
 
+@login_required
 def atualiza_materia(request, pk):
     materia = get_object_or_404(Materia, pk=pk)
     if request.method == 'POST':
@@ -31,7 +35,7 @@ def atualiza_materia(request, pk):
     return render(request, 'materia/form.html', {'form': form})
 
 
-
+@login_required
 def deleta_materia(request, pk):
     materia = get_object_or_404(Materia, pk=pk)
     try:

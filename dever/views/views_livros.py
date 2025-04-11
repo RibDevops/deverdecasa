@@ -4,12 +4,14 @@ from..models import Livro
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
-# Views para Livro
+@login_required
 def lista_livro(request):
     livros = Livro.objects.all()
     return render(request, 'livros/lista.html', {'livros': livros})
 
+@login_required
 def cria_livro(request):
     if request.method == 'POST':
         form = LivrosForm(request.POST)
@@ -20,6 +22,7 @@ def cria_livro(request):
         form = LivrosForm()
     return render(request, 'livros/form.html', {'form': form})
 
+@login_required
 def atualiza_livro(request, pk):
     livro = get_object_or_404(Livro, pk=pk)
     if request.method == 'POST':
@@ -32,6 +35,7 @@ def atualiza_livro(request, pk):
     return render(request, 'livros/form.html', {'form': form})
 
 
+@login_required
 def deleta_livro(request, pk):
     livro = get_object_or_404(Livro, pk=pk)
     try:

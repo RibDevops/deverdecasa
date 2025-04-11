@@ -2,12 +2,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 from ..forms import AlunosForm
 from ..models import Alunos
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
 
-# Views para Alunos
+@login_required
 def lista_alunos(request):
     alunos = Alunos.objects.all()
     return render(request, 'alunos/lista.html', {'alunos': alunos})
 
+@login_required
 def cria_alunos(request):
     if request.method == 'POST':
         form = AlunosForm(request.POST)
@@ -18,6 +22,7 @@ def cria_alunos(request):
         form = AlunosForm()
     return render(request, 'alunos/form.html', {'form': form})
 
+@login_required
 def atualiza_alunos(request, pk):
     alunos = get_object_or_404(Alunos, pk=pk)
     if request.method == 'POST':
@@ -36,9 +41,8 @@ def atualiza_alunos(request, pk):
 #         return redirect('lista_alunos')
 #     return render(request, 'alunos/confirma_delecao.html', {'alunos': alunos})
 
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib import messages
 
+@login_required
 def deleta_alunos(request, pk):
     alunos = get_object_or_404(Alunos, pk=pk)
     try:

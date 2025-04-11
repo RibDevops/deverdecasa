@@ -6,6 +6,7 @@ from ..models import DeverDeCasa, Escola
 from ..forms import DeverDeCasaForm  # Assumindo que você tenha um formulário personalizado
 from datetime import date
 
+@login_required
 def dever_list(request):
     deveres = DeverDeCasa.objects.all().order_by('data_entrega')
     for dever in deveres:
@@ -24,7 +25,7 @@ def dever_detail(request, pk):
     dever = get_object_or_404(DeverDeCasa, pk=pk)
     return render(request, 'dever/dever_detail.html', {'dever': dever})
 
-@login_required(login_url='/login/')
+@login_required
 def dever_create(request):
     if request.method == 'POST':
         form = DeverDeCasaForm(request.POST)
@@ -40,7 +41,7 @@ def dever_create(request):
     return render(request, 'dever/dever_form.html', {'form': form, 'escolas': escolas})
 
 
-# @login_required
+@login_required
 def dever_update(request, pk):
     print(pk)
     dever = get_object_or_404(DeverDeCasa, pk=pk)

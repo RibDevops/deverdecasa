@@ -3,13 +3,16 @@ from..forms import ProfessorForm
 from..models import Professor
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Views para Professor
 
+@login_required
 def lista_professor(request):
     professor = Professor.objects.all()
     return render(request, 'professor/lista.html', {'professores': professor})
 
+@login_required
 def cria_professor(request):
     if request.method == 'POST':
         form = ProfessorForm(request.POST)
@@ -20,6 +23,7 @@ def cria_professor(request):
         form = ProfessorForm()
     return render(request, 'professor/form.html', {'form': form})
 
+@login_required
 def atualiza_professor(request, pk):
     professor = get_object_or_404(Professor, pk=pk)
     if request.method == 'POST':
@@ -38,6 +42,7 @@ def atualiza_professor(request, pk):
 #         return redirect('dever:lista_professor')
 #     return render(request, 'professor/confirma_delecao.html', {'professor': professor})
 
+@login_required
 def deleta_professor(request, pk):
     professor = get_object_or_404(Professor, pk=pk)
     try:

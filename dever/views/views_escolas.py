@@ -3,12 +3,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 from..forms import EscolaForm
 from..models import Escola
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
 
-# Views para Escola
+@login_required
 def lista_escolas(request):
     escolas = Escola.objects.all()
     return render(request, 'escolas/lista.html', {'escolas': escolas})
 
+@login_required
 def cria_escolas(request):
     if request.method == 'POST':
         form = EscolaForm(request.POST)
@@ -19,6 +23,7 @@ def cria_escolas(request):
         form = EscolaForm()
     return render(request, 'escolas/form.html', {'form': form})
 
+@login_required
 def atualiza_escolas(request, pk):
     print(pk)
     escola = get_object_or_404(Escola, pk=pk)
@@ -40,9 +45,8 @@ def atualiza_escolas(request, pk):
 #         return redirect('dever:lista_escolas')
 #     return render(request, 'escolas/confirma_delecao.html', {'escola': escola})
 
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib import messages
 
+@login_required
 def deleta_escolas(request, pk):
     escola = get_object_or_404(Escola, pk=pk)
     try:
