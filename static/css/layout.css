@@ -1,17 +1,22 @@
 /* TABLE - Custom Styles */
 .vermelho {
-    background-color: #ffebee;
-    border-left: 4px solid #ee6b78;
+    background-color: #ee6b78;
+    border-left: 4px solid #ffebee;
 }
 
 .amarelo {
-    background-color: #fff8e1;
-    border-left: 4px solid #ffc107;
+    background-color: #ffc107;
+    border-left: 4px solid #e9dcb7;
 }
 
 .verde {
-    background-color: #e8f5e9;
-    border-left: 4px solid #28a745;
+    background-color: #28a745;
+    border-left: 4px solid #a7d3b1;
+}
+
+.normal {
+    background-color: #0d6efd;
+    border-left: 4px solid #a3bfec !important;
 }
 
 /* Estilos personalizados */
@@ -54,3 +59,57 @@ main {
 footer {
   background-color: #f8f9fa;
 }
+
+/* Ajustes para mobile */
+@media (max-width: 767.98px) {
+  .card {
+      margin-bottom: 1rem;
+  }
+  
+  h1, h2, h3 {
+      word-wrap: break-word;
+  }
+  
+  .list-unstyled li {
+      margin-bottom: 0.5rem;
+  }
+}
+
+/* Melhoria para cards de deveres */
+.card {
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* Espaçamento melhorado */
+section {
+  padding: 1.5rem 0;
+}
+
+
+    /* Ajustes para mobile */
+    @media (max-width: 767.98px) {
+      .btn-sm {
+          padding: 0.25rem 0.5rem;
+          font-size: 0.875rem;
+      }
+      
+      .card {
+          border-left: 4px solid;
+      }
+      
+      .border-vermelho {
+          border-left-color: #dc3545 !important;
+      }
+      
+      .border-amarelo {
+          border-left-color: #ffc107 !important;
+      }
+      
+      .border-normal {
+          border-left-color: #0d6efd !important;
+      }
+  }
