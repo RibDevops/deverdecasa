@@ -196,3 +196,13 @@ LOGOUT_REDIRECT_URL = "/"  # new
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ROLEPERMISSIONS_MODULE = 'login.roles'
+
+
+# Configurações de Email
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'  # Ou seu servidor SMTP
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'seuemail@gmail.com'  # Substitua pelo seu email
+# EMAIL_HOST_PASSWORD = 'suasenha'  # Substitua pela sua senha/app password
+# DEFAULT_FROM_EMAIL = 'seuemail@gmail.com'  # Deve ser o mesmo que EMAIL_HOST_USER
